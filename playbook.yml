@@ -1,0 +1,17 @@
+---
+- name: hexlet deploy project
+  hosts: all
+  remote_user: "{{ remote_user }}"
+  become: true
+  tasks:
+    - name: "prepare db info to pass to app"
+      ansible.builtin.include_vars:
+        file: "db_info.json"
+        name: "docker_vars"
+    - name: run image
+      community.docker.docker_container:
+        name: "redmine"
+        image: "redmine"
+        restart_policy: "unless-stopped"
+        ports: "80:3000"
+        env: "{{ docker_vars }}"

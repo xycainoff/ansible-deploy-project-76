@@ -6,6 +6,7 @@ db_info.json
 
 #auto-generated hosts file for Ansible
 hosts.ini
+inventory.ini
 
 .DS_Store
 .swp
